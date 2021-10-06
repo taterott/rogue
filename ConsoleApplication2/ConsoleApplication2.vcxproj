@@ -139,7 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleApplication2.cpp" />
+    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="WorldMap.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NPC.hpp" />
+    <ClInclude Include="Input.hpp" />
+    <ClInclude Include="WorldMap.hpp" />
+    <ClInclude Include="Player.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
