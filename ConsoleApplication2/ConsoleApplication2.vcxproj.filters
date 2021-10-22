@@ -30,6 +30,9 @@
     <ClCompile Include="NPC.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Generic.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.hpp">

@@ -18,28 +18,26 @@ public:
 	WorldMap() {};
 	~WorldMap() {};
 
-	void printMap();
+	void print_map();
 	//void setTile(char character, int row, int column, int prev_row, int prev_column)
 	//{
 	//	tilesActive[prev_row][prev_column] = tilesBase[prev_row][prev_column];
 	//	tilesActive[row][column] = character;
 	//}
 
-	int checkWallCollision(int dest_x, int dest_y);
+	int check_wall_collision(int dest_x, int dest_y);
 
-	void loadMapFromTxt(std::string map_location);
+	void load_map_from_txt(std::string map_location);
 
-	void convertMap();
+	void convert_map();
 
-	void printStringMap();
-
-private:
+	void print_string_map();
 
 	const int rows = ROWS;
 	const int columns = COLUMNS;
-	char tilesActive[ROWS][COLUMNS];
+	char tiles_active[ROWS][COLUMNS];
 
-	char tilesBase[ROWS][COLUMNS];
+	char tiles_base[ROWS][COLUMNS];
 
-	std::string mapString;
+	std::string map_string;
 };

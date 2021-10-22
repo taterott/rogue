@@ -1,23 +1,18 @@
-#include <iostream>
-#include <string>
-#include <stdlib.h>
-#include <fstream>
-#include "Player.hpp"
 #include "WorldMap.hpp"
 
-void WorldMap::printMap()
+void WorldMap::print_map()
 {
 	for (int n = 0; n < ROWS; n++) {
 		for (int m = 0; m < COLUMNS; m++) {
-			std::cout << tilesActive[n][m];
+			std::cout << tiles_active[n][m];
 		}
 		std::cout << std::endl;
 	}
 }
 
-int WorldMap::checkWallCollision(int dest_x, int dest_y) 
+int WorldMap::check_wall_collision(int dest_x, int dest_y) 
 {
-	if (tilesBase[dest_y][dest_x] != '.') {
+	if (tiles_base[dest_y][dest_x] != '.') {
 		return 0;
 	}
 	else
@@ -26,7 +21,7 @@ int WorldMap::checkWallCollision(int dest_x, int dest_y)
 	}
 }
 
-void WorldMap::loadMapFromTxt(std::string map_location)
+void WorldMap::load_map_from_txt(std::string map_location)
 {
 	std::fstream map;
 	map.open(map_location, std::ios::in);
@@ -36,41 +31,41 @@ void WorldMap::loadMapFromTxt(std::string map_location)
 	}
 	else
 	{
-		std::getline(map, mapString, 'G');
+		std::getline(map, map_string, 'G');
 	}
 
-	convertMap();
+	convert_map();
 
 	map.close();
 }
 
-void WorldMap::printStringMap()
+void WorldMap::print_string_map()
 
 {
-		std::cout << mapString;
+		std::cout << map_string;
 }
 
 
-void WorldMap::convertMap()
+void WorldMap::convert_map()
 {
-	int rowPosition = 0;
-	int columnPosition = 0;
-	int stringPosition = 0;
+	int row_position = 0;
+	int column_position = 0;
+	int string_position = 0;
 
-	while (rowPosition < ROWS) {
-		for (columnPosition; columnPosition < COLUMNS; columnPosition++) {
-			if (mapString[stringPosition] == '\n') {
+	while (row_position < ROWS) {
+		for (column_position; column_position < COLUMNS; column_position++) {
+			if (map_string[string_position] == '\n') {
 				break;
 			}
 			else {
-				tilesBase[rowPosition][columnPosition] = mapString[stringPosition];
-				tilesActive[rowPosition][columnPosition] = mapString[stringPosition];
+				tiles_base[row_position][column_position] = map_string[string_position];
+				tiles_active[row_position][column_position] = map_string[string_position];
 			}
-			stringPosition++;
+			string_position++;
 		}
-		rowPosition++;
-		stringPosition++;
-		columnPosition = 0;
+		row_position++;
+		string_position++;
+		column_position = 0;
 	}
 }
 

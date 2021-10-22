@@ -1,18 +1,23 @@
 ﻿// ConsoleApplication2.cpp : This file contains the 'main' function. Program execution begins and ends there.
-// REFAKTORNOUT TEN KOD aby to bylo nejak funkcni
+// REFAKTORNOUT TEN KOD aby to bylo nejak funkcni - DONE
+// Vyresit handl az bude NPC funkcionalita
+//vyresit u class public a private
+//naucit se realne jak pouzivat reference in comparison to pointers
+//unspaghettifi input, it's so ugly
+//maybe put attack in a better place than in a nested entity_check in input? seems a lil unintuitive for
+//code readers
+//make add new entity work in NPC constructor
+
 //dat const na mista
 
 #include <iostream>
 #include <string>
 #include <conio.h>
 #include <stdlib.h>
-#include <Windows.h>
 #include <vector>
 #include <fstream>
-#include "Player.hpp"
-#include "WorldMap.hpp"
 #include "Input.hpp"
-#include "NPC.hpp"
+
 
 #define ROWS 25
 #define COLUMNS 25
@@ -32,42 +37,10 @@ overline: ‾:
 				 |_____|
 
 
+STYLE RULES:
+1. Use snake_case, except for class names, use PascalCase for those
+
 */
-//class NonPlayerCharacter
-//{
-//public:
-//	NonPlayerCharacter(char npc_char, std::string name, int x, int y, int health)
-//	{
-//		this->npc_char = npc_char;
-//		this->name = name;
-//		this->x = x;
-//		this->y = y;
-//		this->health = health;
-//	}
-//private:
-//	char npc_char = 'Ω';
-//	std::string name;
-//	int x = 0;
-//	int y = 0;
-//	int prev_x = 0;
-//	int prev_y = 0;
-//	int health = 3;
-//	bool enemy = false;
-//};
-//
-//class Entities
-//{
-//public:
-//	Entities() {};
-//	~Entities() {};
-//
-//	void addNewEntity(NonPlayerCharacter * entity_to_add){
-//		npcs.push_back(entity_to_add);
-//	}
-//	std::vector<NonPlayerCharacter*> npcs;
-//
-//	int num_of_npcs = 0;
-//};
 
 int main()
 {
@@ -76,19 +49,31 @@ int main()
 	Input input;
 	Entities entity;
 	//kdyz dam new tak to vraci pointer, kdyz bez new tak to vraci ten objekt;
-	auto *npcko = new NonPlayerCharacter('Δ', "Delta", 12, 12, 3);
-	entity.addNewEntity(npcko);
+
+	auto npcko = new NonPlayerCharacter('E', "Delta", 3, 3, 2, entity);
+	auto npcko2 = new NonPlayerCharacter('F', "Filip", 1, 9, 3, entity);
+	auto npcko3 = new NonPlayerCharacter('X', "Tomas", 1, 10, 4, entity);
+
+
+
+	entity.add_new_entity(npcko);
+	entity.add_new_entity(npcko2);
+	entity.add_new_entity(npcko3);
 	
 
-	mapa.loadMapFromTxt("map.txt");
+	mapa.load_map_from_txt("map.txt");
 
+	//main game loop
 	while (true)
 	{
 		system("CLS");
 
-		mapa.printMap();
-		hrac.movePlayer();
-		input.PlayerMovement(mapa, hrac);
+		mapa.print_map();
+		hrac.move_player();
+		npcko->move_npc();
+		npcko2->move_npc();
+		npcko3->move_npc();
+		input.player_movement(mapa, hrac, entity);
 
 		std::cout.flush();
 
