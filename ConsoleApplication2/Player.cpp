@@ -1,31 +1,32 @@
 #include "Player.hpp"
-void Player::attack(int x, int y, Entities entity_list)
+void Player::attack(int x, int y, Entities& entity_list, Text& text_log)
 {
 	int npc_index = entity_list.find_entity_thru_coords(x, y);
 	if (npc_index != -1)
 	{
-		entity_list.npcs[npc_index]->current_health--;
-		if (entity_list.npcs[npc_index]->current_health <= 0)
+		if (entity_list.npcs[npc_index]->enemy == true) 
 		{
-			delete entity_list.npcs[npc_index];
+			entity_list.npcs[npc_index]->current_health--;
+			Beep(523, 100);
+			Beep(123, 100);
+			text_log.append_to_log(entity_list.npcs[npc_index]->name + " took " + std::to_string(damage) + " points of damage.");
+
+			if (entity_list.npcs[npc_index]->current_health <= 0)
+			{
+				Beep(323, 100);
+				text_log.append_to_log(entity_list.npcs[npc_index]->name + " died.");
+				entity_list.npcs.erase(entity_list.npcs.begin() + npc_index);
+			}
+		}
+
+		else if (entity_list.npcs[npc_index]->enemy == false)
+		{
+			Beep(130.81, 100);
+			Beep(196.00, 100);
+			text_log.append_to_log(entity_list.npcs[npc_index]->test_greeting);
 		}
 	}
 }
-
-void Player::go_to_xy(int x, int y)
-{
-	if (the_handle == nullptr)
-	{
-		the_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	}
-
-	COORD cord;
-	cord.X = x;
-	cord.Y = y;
-
-	SetConsoleCursorPosition(the_handle, cord);
-}
-
 
 void Player::move_player() {
 	go_to_xy(x, y);

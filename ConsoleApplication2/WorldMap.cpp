@@ -2,8 +2,10 @@
 
 void WorldMap::print_map()
 {
-	for (int n = 0; n < ROWS; n++) {
-		for (int m = 0; m < COLUMNS; m++) {
+	for (int n = 0; n < ROWS; n++) 
+	{
+		for (int m = 0; m < COLUMNS; m++)
+		{
 			std::cout << tiles_active[n][m];
 		}
 		std::cout << std::endl;
@@ -12,7 +14,8 @@ void WorldMap::print_map()
 
 int WorldMap::check_wall_collision(int dest_x, int dest_y) 
 {
-	if (tiles_base[dest_y][dest_x] != '.') {
+	if (tiles_base[dest_y][dest_x] != '.') 
+	{
 		return 0;
 	}
 	else
@@ -26,7 +29,8 @@ void WorldMap::load_map_from_txt(std::string map_location)
 	std::fstream map;
 	map.open(map_location, std::ios::in);
 
-	if (!map) {
+	if (!map) 
+	{
 		std::cout << "Couldn't find map file of that name" << std::endl;
 	}
 	else
@@ -52,12 +56,16 @@ void WorldMap::convert_map()
 	int column_position = 0;
 	int string_position = 0;
 
-	while (row_position < ROWS) {
-		for (column_position; column_position < COLUMNS; column_position++) {
-			if (map_string[string_position] == '\n') {
+	while (row_position < ROWS) 
+	{
+		for (column_position; column_position < COLUMNS; column_position++)
+		{
+			if (map_string[string_position] == '\n')
+			{
 				break;
 			}
-			else {
+			else
+			{
 				tiles_base[row_position][column_position] = map_string[string_position];
 				tiles_active[row_position][column_position] = map_string[string_position];
 			}

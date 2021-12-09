@@ -1,19 +1,26 @@
 ﻿#pragma once
-
+//IF YOU PASS ANYTHING NOT AS A PONTER OR A REFERENCE ITS GETTING COPIED
 #include "NPC.hpp"
 
 extern HANDLE the_handle = nullptr;
 
-NonPlayerCharacter::NonPlayerCharacter(char npc_char, std::string name, int x, int y, int health, Entities entity_list)
+NonPlayerCharacter::NonPlayerCharacter(char npc_char, std::string name, int x, int y, int health,
+	bool hostile)
 {
 		this->npc_char = npc_char;
 		this->name = name;
 		this->x = x;
 		this->y = y;
 		this->health = health;
-		this->entity_index = entity_list.num_of_npcs;
-		//entity_list.add_new_entity(this);
+		this->current_health = health;
+		this->enemy = hostile;
+		this->test_greeting = "Hey, I'm " + name + ". Watch where you're going!";
 }
+
+//NonPlayerCharacter::~NonPlayerCharacter()
+//{
+//
+//}
 
 void Entities::add_new_entity(NonPlayerCharacter* entity_to_add) 
 {
@@ -35,13 +42,8 @@ int Entities::find_entity_thru_coords(int x, int y)
 	return -1;
 }
 
-void NonPlayerCharacter::go_to_xy(int x, int y)
+void BasicEntity::go_to_xy(int x, int y)
 {
-
-	if (the_handle == nullptr)
-	{
-		the_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	}
 
 	COORD cord;
 	cord.X = x;
@@ -54,7 +56,47 @@ void NonPlayerCharacter::go_to_xy(int x, int y)
 
 
 
-void NonPlayerCharacter::move_npc() {
-	go_to_xy(x, y);
-	std::cout << npc_char;
+int NonPlayerCharacter::move_npc() 
+{
+	if (death)
+	{
+		return 0;
+	}
+	else
+	{
+		go_to_xy(x, y);
+		std::cout << npc_char;
+		return 1;
+	}
+}
+
+void NonPlayerCharacter::check_death()
+{
+	if (current_health <= health) {
+		death = true;
+	}
+}
+
+void Entities::dealloc_entities()
+{
+	for (int i = 0; i < npcs.size(); i++)
+	{
+		delete npcs[i];
+	}
+}
+
+void Entities::move_all_entities()
+{
+	for (int i = 0; i < npcs.size(); i++)
+	{
+		npcs[i]->move_npc();
+	}
+}
+
+void Entities::create_npc(char npc_char, std::string name, int x, int y, int health,
+	bool hostile)
+{
+	NonPlayerCharacter* new_npc = new NonPlayerCharacter(npc_char, name, x, y, health,
+		hostile);
+	this->add_new_entity(new_npc);
 }

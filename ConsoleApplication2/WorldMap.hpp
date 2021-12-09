@@ -9,15 +9,9 @@
 #include <fstream>
 #include "Player.hpp"
 
-#define ROWS 25
-#define COLUMNS 25
-
 class WorldMap
 {
 public:
-	WorldMap() {};
-	~WorldMap() {};
-
 	void print_map();
 	//void setTile(char character, int row, int column, int prev_row, int prev_column)
 	//{

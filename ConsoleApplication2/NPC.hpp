@@ -10,11 +10,12 @@ class NonPlayerCharacter;
 class Entities
 {
 public:
-	Entities() {};
-	~Entities() {};
-
+	void create_npc(char npc_char, std::string name, int x, int y, int health,
+		bool hostile);
 	void add_new_entity(NonPlayerCharacter* entity_to_add);
 	int find_entity_thru_coords(int x, int y);
+	void move_all_entities();
+	void dealloc_entities();
 
 	//do non pointer, but maybe a linked list woudl be better whenit comes
 	//to a lot of things
@@ -23,33 +24,43 @@ public:
 	std::vector<NonPlayerCharacter*> npcs;
 
 	int num_of_npcs = 0;
-private:
+
+
 };
 
-class NonPlayerCharacter
+//pridavani entit skrze create metodu
+//to je super napad
+//abychom to 
+class BasicEntity
 {
 public:
 
-	NonPlayerCharacter(char npc_char, std::string name, int x, int y, int health, Entities entity_list);
-	void move_npc();
 	void go_to_xy(int x, int y);
-	char npc_char = 'ﬡ';
 
-	void check_death() 
-	{
-		if (current_health <= health) {
-			free(this);
-		}
-	}
 	std::string name;
-	int x = 3;
-	int y = 3;
+
+	int x = 0;
+	int y = 0;
 	int prev_x = 0;
 	int prev_y = 0;
+};
+
+class NonPlayerCharacter : public BasicEntity
+{
+public:
+	NonPlayerCharacter(char npc_char, std::string name, int x, int y, int health,
+		bool hostile);
+	char npc_char = 'A';
+	int move_npc();
+	void check_death();
 	int health = 3;
-	int current_health = health;
+	int current_health = 1;
 	bool enemy = false;
-	int entity_index;
+	int entity_index = 0;
+
+	std::string test_greeting = "XXX";
+
+	bool death = false;
 
 	friend class Entities;
 
