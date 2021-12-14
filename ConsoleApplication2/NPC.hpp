@@ -3,7 +3,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "Generic.cpp"
+#include "Generic.hpp"
+#include <fstream>
 
 class NonPlayerCharacter;
 
@@ -53,12 +54,15 @@ public:
 	char npc_char = 'A';
 	int move_npc();
 	void check_death();
+	//void load_dialogue_from_txt(std::string dialogue_location);
 	int health = 3;
 	int current_health = 1;
 	bool enemy = false;
 	int entity_index = 0;
 
-	std::string test_greeting = "XXX";
+	std::string test_greeting;
+
+	//Dialogue npc_dialogue;
 
 	bool death = false;
 

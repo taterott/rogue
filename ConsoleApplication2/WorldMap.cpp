@@ -26,21 +26,9 @@ int WorldMap::check_wall_collision(int dest_x, int dest_y)
 
 void WorldMap::load_map_from_txt(std::string map_location)
 {
-	std::fstream map;
-	map.open(map_location, std::ios::in);
-
-	if (!map) 
-	{
-		std::cout << "Couldn't find map file of that name" << std::endl;
-	}
-	else
-	{
-		std::getline(map, map_string, 'G');
-	}
-
+	get_string_from_file(map_location, map_string);
 	convert_map();
 
-	map.close();
 }
 
 void WorldMap::print_string_map()

@@ -1,9 +1,18 @@
-#pragma once
+#include "Generic.hpp"
 
-#include "Windows.h"
+void get_string_from_file(std::string file_location, std::string& target)
+{
+	std::fstream file;
+	file.open(file_location);
 
+	if (!file)
+	{
+		std::cout << "Couldn't find file at that location" << std::endl;
+	}
+	else
+	{
+		std::getline(file, target, '@');
+	}
 
-#define ROWS 25
-#define COLUMNS 25
-
-extern HANDLE the_handle;
+	file.close();
+}

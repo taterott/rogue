@@ -77,6 +77,25 @@ void NonPlayerCharacter::check_death()
 	}
 }
 
+//void NonPlayerCharacter::load_dialogue_from_txt(std::string dialogue_location)
+//{
+//	std::fstream dialogue;
+//	dialogue.open(dialogue_location, std::ios::in);
+//
+//	if (!dialogue)
+//	{
+//		std::cout << "Couldn't find map file of that name" << std::endl;
+//	}
+//	else
+//	{
+//		std::getline(map, map_string, 'G');
+//	}
+//
+//	convert_map();
+//
+//	map.close();
+//}
+
 void Entities::dealloc_entities()
 {
 	for (int i = 0; i < npcs.size(); i++)
