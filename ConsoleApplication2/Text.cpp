@@ -40,4 +40,24 @@ int Text::render_log()
 	return 1;
 }
 
+void Dialogue::load_dialogue_from_text(std::string dialogue_location)
+{
+	get_string_from_file(dialogue_location, dialogue_string);
+	convert_dialogue();
+}
+
+void Dialogue::convert_dialogue()
+{
+	std::stringstream s(dialogue_string);
+
+	std::string str_to_push;
+
+	while (std::getline(s, str_to_push, '\n'))
+	{
+		dialogue_array.push_back(str_to_push);
+	}
+
+
+}
+
 /* s s s s*/

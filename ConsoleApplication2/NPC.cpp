@@ -15,6 +15,7 @@ NonPlayerCharacter::NonPlayerCharacter(char npc_char, std::string name, int x, i
 		this->current_health = health;
 		this->enemy = hostile;
 		this->test_greeting = "Hey, I'm " + name + ". Watch where you're going!";
+		load_dialogue();
 }
 
 //NonPlayerCharacter::~NonPlayerCharacter()
@@ -22,7 +23,7 @@ NonPlayerCharacter::NonPlayerCharacter(char npc_char, std::string name, int x, i
 //
 //}
 
-void Entities::add_new_entity(NonPlayerCharacter* entity_to_add) 
+void Entities::add_new_entity(NonPlayerCharacter* entity_to_add)
 {
 	npcs.push_back(entity_to_add);
 	num_of_npcs++;
@@ -75,6 +76,11 @@ void NonPlayerCharacter::check_death()
 	if (current_health <= health) {
 		death = true;
 	}
+}
+
+void NonPlayerCharacter::load_dialogue()
+{
+	npc_dialogue.load_dialogue_from_text(name + ".txt");
 }
 
 //void NonPlayerCharacter::load_dialogue_from_txt(std::string dialogue_location)

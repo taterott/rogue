@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 
 class Text
 {
@@ -28,5 +29,11 @@ class Dialogue
 public:
 	int current_dialogue = 0;
 	std::vector<std::string> dialogue_array;
+	std::string dialogue_string;
+
+	void load_dialogue_from_text(std::string dialogue_location);
+
+	void convert_dialogue();
+
 };
 

@@ -1,5 +1,6 @@
 #include "Generic.hpp"
 
+//should this be extern? hyuck
 void get_string_from_file(std::string file_location, std::string& target)
 {
 	std::fstream file;
