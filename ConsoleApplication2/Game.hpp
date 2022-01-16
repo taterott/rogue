@@ -18,9 +18,6 @@ public:
 	Entities entity;
 	Text text_log;
 
-
-	//is there actually any reason to use the static keyword
-	//for methods? except safeguarding? doesn't really apply here?
 	void render_screen();
 	void handle_events();
 	void init();

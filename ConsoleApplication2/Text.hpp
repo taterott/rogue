@@ -27,11 +27,13 @@ public:
 class Dialogue
 {
 public:
-	int current_dialogue = 0;
+	int line_index = 0;
 	std::vector<std::string> dialogue_array;
 	std::string dialogue_string;
 
-	void load_dialogue_from_text(std::string dialogue_location);
+	int load_dialogue_from_text(std::string& dialogue_location);
+
+	void render_dialogue(Text& text_log);
 
 	void convert_dialogue();
 

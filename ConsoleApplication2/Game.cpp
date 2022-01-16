@@ -1,5 +1,6 @@
 #include "Game.hpp"
 
+//Flushes output, clears console, prints our map and renders our text log
 void MainLoop::render_screen()
 {
 	std::cout.flush();
@@ -8,6 +9,8 @@ void MainLoop::render_screen()
 	text_log.render_log();
 }
 
+//Handles our events, that is -> moves player according to previous movement,
+//handles entity movement and takes input from player for next move
 void MainLoop::handle_events()
 {
 	hrac.move_player();
@@ -16,8 +19,7 @@ void MainLoop::handle_events()
 
 }
 
-//init has to have npc spawning and entity administrating features
-//once i fix the constructor for npc
+//Here we put stuff we wanna load up - the map and its NPCs
 void MainLoop::init()
 {
 	//sets our the_handle var to standard output in console
@@ -28,13 +30,12 @@ void MainLoop::init()
 	}
 
 	mapa.load_map_from_txt("map.txt");
+	entity.create_npc('f', "filip", 20, 20, 420, false);
+	entity.create_npc('c', "katusa", 21, 21, 69, false);
 }
-
+//our mainloop run - self explanatory
 void MainLoop::run()
 {
-	entity.create_npc('E', "Delta", 3, 3, 2, true);
-	entity.create_npc('F', "Filip", 20, 20, 420, false);
-
 	init();
 
 	while (true)

@@ -1,5 +1,4 @@
-﻿#pragma once
-//IF YOU PASS ANYTHING NOT AS A PONTER OR A REFERENCE ITS GETTING COPIED
+﻿//IF YOU PASS ANYTHING NOT AS A PONTER OR A REFERENCE ITS GETTING COPIED
 #include "NPC.hpp"
 
 extern HANDLE the_handle = nullptr;
@@ -80,7 +79,13 @@ void NonPlayerCharacter::check_death()
 
 void NonPlayerCharacter::load_dialogue()
 {
-	npc_dialogue.load_dialogue_from_text(name + ".txt");
+	std::string dialogue_location = name + ".txt";
+
+	if (npc_dialogue.load_dialogue_from_text(dialogue_location) == 0)
+	{
+		npc_dialogue.dialogue_array.push_back("Hey, dialogue didn't load.");
+		npc_dialogue.dialogue_array.push_back("Something weird is going on partner.");
+	}
 }
 
 //void NonPlayerCharacter::load_dialogue_from_txt(std::string dialogue_location)

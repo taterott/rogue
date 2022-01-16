@@ -18,7 +18,7 @@
 //a delat s nim veci, to je na movement systemu (mozna udelat classu)
 
 //dat const na mista
-
+#pragma once
 #include "Game.hpp"
 
 int main(int argc, char* argv[])

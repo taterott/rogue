@@ -23,7 +23,7 @@ void Player::attack(int x, int y, Entities& entity_list, Text& text_log)
 		{
 			Beep(130.81, 100);
 			Beep(196.00, 100);
-			text_log.append_to_log(entity_list.npcs[npc_index]->test_greeting);
+			entity_list.npcs[npc_index]->npc_dialogue.render_dialogue(text_log);
 		}
 	}
 }

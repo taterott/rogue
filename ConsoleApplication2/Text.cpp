@@ -1,4 +1,3 @@
-#pragma once
 #include "text.hpp"
 
 
@@ -40,10 +39,18 @@ int Text::render_log()
 	return 1;
 }
 
-void Dialogue::load_dialogue_from_text(std::string dialogue_location)
+int Dialogue::load_dialogue_from_text(std::string& dialogue_location)
 {
-	get_string_from_file(dialogue_location, dialogue_string);
-	convert_dialogue();
+
+	if (get_string_from_file(dialogue_location, dialogue_string) == 1)
+	{
+		convert_dialogue();
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 void Dialogue::convert_dialogue()
@@ -58,6 +65,18 @@ void Dialogue::convert_dialogue()
 	}
 
 
+}
+
+void Dialogue::render_dialogue(Text& text_log)
+{
+	if (dialogue_array.size() > 0)
+	{
+		text_log.append_to_log(dialogue_array[line_index]);
+		if (line_index < dialogue_array.size() - 1)
+		{
+			line_index++;
+		}
+	}
 }
 
 /* s s s s*/
